@@ -5,6 +5,8 @@ import Search from '../components/search/Search';
 import Pokemon from '../components/pokelist/Pokemon';
 import PokemonDetail from '../components/pokelist/PokemonDetail';
 import { IPokemon } from '../IPokemon';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 type Props = {}
 interface Pokemons {
     name: string;
@@ -14,6 +16,7 @@ interface Pokemons {
 const PokeDex = (props: Props) => {
     const [pokemons, setPokemons] = useState<IPokemon[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
+    const [loadPoke, setloadPoke] = useState<boolean>(false);
     const [newPokemons, setNewPokemons] = useState<string>();
     const refScrollUp = useRef<any>(null);
     const [visible, setVisible] = useState<boolean>(false);
@@ -27,13 +30,18 @@ const PokeDex = (props: Props) => {
             let urlImg = pokemonInfo.data.sprites.front_default;
             setPokemons((index) => [...index, { id: id, name: pokemon.name, url: urlImg, type: type }]);
             setLoading(false);
+            setTimeout(() => {
+                setloadPoke(false);
+            }, 500);
+
         });
     }
     );
     const scrollHandler = async (event: any) => {
         const test = Math.floor(event.currentTarget.scrollHeight - event.currentTarget.scrollTop);
         event.currentTarget.scrollTop > 200 ? setVisible(true) : setVisible(false);
-        if (test === event.currentTarget.clientHeight + 1) {
+        if (test === event.currentTarget.clientHeight) {
+            setloadPoke(true);
             fetchPokemon(newPokemons);
         }
     };
@@ -53,12 +61,31 @@ const PokeDex = (props: Props) => {
             <div className={` ${loading ? null : 'animate-aniLoad '} absolute w-screen h-screen flex items-center justify-center z-40 bg-white `}>
                 <img src="/pokemonheader/log2.png" className=" animate-aniLoadIcon w-16 h-16" alt="pokeball "></img>
             </div>
+
             <div onScroll={scrollHandler} className="bg-container w-screen h-screen m-0 p-0 font-fira  overflow-x-hidden scroll-smooth">
                 <div style={{ backgroundImage: 'url(./pokemonheader/pokeball-icon.png)', backgroundRepeat: `no-repeat`, backgroundPositionX: `-180px`, backgroundPositionY: `-80px` }}
                     className=" flex flex-col px-[4vw] lg:px-[8vw] w-full z-10 bg-[#f6f8fc] h-auto">
+
+                    <Box sx={{
+                        display: 'flex',
+                        width: '40px',
+                        height: '40px',
+                        position: 'fixed',
+                        backgroundColor: 'white',
+                        dropShadow: '0px 0px 10px rgba(0, 0, 0, 0.25)',
+                        borderRadius: '50%',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        left: '50%',
+                        zIndex: 30,
+                        visibility: loadPoke ? 'visible' : 'hidden',
+                    }}>
+                        <CircularProgress size="1.5rem" />
+                    </Box>
                     <header className="header-container my-8">
                         <div ref={refScrollUp}> </div>
                         <Header />
+
                     </header>
                     <main className="main-container flex flex-row">
                         <div className="main-display mb-5 flex-1">
