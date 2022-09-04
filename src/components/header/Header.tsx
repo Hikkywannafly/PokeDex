@@ -12,7 +12,7 @@ const data = [
 const Header: React.FC = (props) => {
   return (
     <>
-      <div className="rounded-lg w-full h-16 bg-white drop-shadow-xl flex flex-row justify-between 
+      <div className="rounded-lg w-full h-12 bg-white drop-shadow-[0_10px_10px_#ededed] flex flex-row justify-between 
       items-center sm:text-[12px] sm:p-4 lg:px-4 lg:py-8 lg:text-base md:text-xs p-3 text-base font-semibold text-gray-500  ">
         {data.map((item, index) => {
           return <HeaderRow key={index} name={item.name} link={item.link} />
