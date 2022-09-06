@@ -1,35 +1,9 @@
 import React from 'react'
-
-interface Props {
-    id: number;
-    name: string;
-    url: string;
-    type: [];
-}
-const typeColors = {
-    normal: '#BCBCAC',
-    fighting: '#BC5442',
-    flying: '#669AFF',
-    poison: '#AB549A',
-    ground: '#DEBC54',
-    rock: '#BCAC66',
-    bug: '#ABBC1C',
-    ghost: '#6666BC',
-    steel: '#ABACBC',
-    fire: '#FF421C',
-    water: '#2F9AFF',
-    grass: '#78CD54',
-    electric: '#FFCD30',
-    psychic: '#FF549A',
-    ice: '#78DEFF',
-    dragon: '#7866EF',
-    dark: '#785442',
-    fairy: '#FFACFF',
-    shadow: '#0E2E4C'
-};
+import { typeColors } from '../../globals'
+import { IPokemon } from '../..//IPokemon'
 type colors = keyof typeof typeColors;
-const Pokemon: React.FC<Props> = (props) => {
-    const { id, name, url, type } = props;
+const Pokemon = ({ id, name, url, type }: IPokemon) => {
+
     return (
         <div className="relative bg-white rounded-2xl drop-shadow-[0_10px_10px_#ededed]
         flex-1 min-w-[30%] 2xl:min-w-[20%] normal-case  flex flex-col justify-center items-center

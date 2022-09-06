@@ -1,24 +1,39 @@
-import React from 'react';
-import HeaderRow from './HeaderRow';
 
-const data = [
-  { name: 'Home', link: '/pokemonheader/log1.png' },
-  { name: 'PokeDex', link: '/pokemonheader/log2.png' },
-  { name: 'VideoGames', link: '/pokemonheader/log3.png' },
-  { name: 'TV Pokemon', link: '/pokemonheader/log1.png' },
-  { name: 'Play! Pokemon', link: '/pokemonheader/log1.png' },
-  { name: 'New', link: '/pokemonheader/log1.png' },
-]
+import React, { useEffect, useState, useRef } from "react";
+import * as Scroll from 'react-scroll';
+
+let scroll = Scroll.animateScroll;
 const Header: React.FC = (props) => {
+  const [scrolledToTop, setScrolledToTop] = useState<boolean>(true);
+  const refScrollUp = useRef<any>(null);
+  const handleScrollUp = () => {
+    refScrollUp.current.scrollIntoView({ behavior: "smooth" });
+
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", handleScrollUp);
+
+    return () => {
+      window.removeEventListener("scroll", handleScrollUp);
+    };
+  }, []);
   return (
     <>
-      <div className="rounded-lg w-full h-12 bg-white drop-shadow-[0_10px_10px_#ededed] flex flex-row justify-between 
-      items-center sm:text-[12px] sm:p-4 lg:px-4 lg:py-8 lg:text-base md:text-xs p-3 text-base font-semibold text-gray-500  ">
-        {data.map((item, index) => {
-          return <HeaderRow key={index} name={item.name} link={item.link} />
-        })}
-      </div>
-
+      <div ref={refScrollUp}> </div>
+      <header className="header-container">
+        <div
+          className={
+            "fixed z-50 w-full bg-white bg-opacity-60 backdrop-blur flex items-center justify-center py-2 transition-all duration-300 transform"
+          }
+        >
+          <img
+            className="w-10 h-10 transition duration-500 ease-in-out transform hover:rotate-180 cursor-pointer"
+            alt="Pokeball"
+            src='/pokemonheader/bg1.png'
+            onClick={handleScrollUp}
+          />
+        </div>
+      </header>
     </>
   )
 };

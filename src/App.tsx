@@ -5,7 +5,6 @@ const App: React.FC = () => {
     <>
 
       <PokeDex />
-
     </>
   );
 }
