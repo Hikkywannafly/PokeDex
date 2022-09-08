@@ -5,17 +5,13 @@ import * as Scroll from 'react-scroll';
 let scroll = Scroll.animateScroll;
 const Header: React.FC = (props) => {
   const [scrolledToTop, setScrolledToTop] = useState<boolean>(true);
+  const [visible, setVisible] = useState<boolean>(false);
   const refScrollUp = useRef<any>(null);
   const handleScrollUp = () => {
     refScrollUp.current.scrollIntoView({ behavior: "smooth" });
-
   };
   useEffect(() => {
-    window.addEventListener("scroll", handleScrollUp);
 
-    return () => {
-      window.removeEventListener("scroll", handleScrollUp);
-    };
   }, []);
   return (
     <>
