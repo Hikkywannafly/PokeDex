@@ -6,19 +6,20 @@ import {
     createAsyncThunk,
     createEntityAdapter
 } from "@reduxjs/toolkit";
-interface IPokemonState {
-    isLoading: boolean;
-    pokemon: IPokemon[];
-    pokemonLength: number;
-    error: string;
-}
-interface MyKnownError {
-    errorMessage: string
-    // ...
-}
-interface MyData {
+export interface Test {
     isLoading: true,
+    pokemon: IPokemon[];
+    pokemonLength: 0,
+    error: {
+        status: true,
+        message: null
+    }
+}
+interface ValidationErrors {
+    errorMessage: string
+    field_errors: Record<string, string>
   }
+  
 const NUMBER_LIMIT = 1000;
 // entity adapter
 const pokemonAdapter = createEntityAdapter();
@@ -33,44 +34,36 @@ const initialState = pokemonAdapter.getInitialState({
     } as any
 })
 
+
 // thunk func get pokemon
-export const getAllPokemonList = createAsyncThunk<
-// Return type of the payload creator
-MyData,
-// First argument to the payload creator
-IPokemonState,
-// Types for ThunkAPI
-{
-  extra: {
-    jwt: string
-  }
-  rejectValue: MyKnownError
-}
->(
-    'pokemon/getAllPokemonList',
-    async (payload, { rejectWithValue  })  => {
-        const tempArr: any[] = [];
-        try {
-            const res = await getApi('/pokemon', {
-                params: {
-                    limit: NUMBER_LIMIT
-                },
-            })
-            await res.data.results.forEach(async (pokemon: IPokemonBase) => {
-                const results = await getApi.get(`pokemon/${pokemon.name}`)
-                tempArr.push({
-                    id: results.data.id,
-                    name: pokemon.name,
-                    type: results.data.types.map((type: any) => type.type.name),
+export const getAllPokemonList = createAsyncThunk
+    <IPokemon[], void, { rejectValue: ValidationErrors }>
+    (
+        'pokemon/getAllPokemonList',
+        async (payload, { rejectWithValue }) => {
+            const tempArr: any[] = [];
+           
+            try {
+                const res = await getApi('/pokemon', {
+                    params: {
+                        limit: NUMBER_LIMIT
+                    },
                 })
-            })
-            return tempArr;
+                await res.data.results.forEach(async (pokemon: IPokemonBase) => {
+                    const results = await getApi.get(`pokemon/${pokemon.name}`)
+                    tempArr.push({
+                        id: results.data.id,
+                        name: pokemon.name,
+                        type: results.data.types.map((type: any) => type.type.name),
+                    })
+                })
+                return tempArr;
+            }
+            catch (error: any) {
+                return rejectWithValue(error.response.data)
+            }
         }
-        catch (error: any) {
-            return rejectWithValue(error.response.data)
-        }
-    }
-)
+    )
 // create silce
 const pokemonSlice = createSlice({
     name: 'pokemon',

@@ -13,7 +13,7 @@ const App: React.FC = () => {
   useEffect(() => {
 
     store.dispatch(getAllPokemonList())
-    
+
   }, [])
   return (
     <>

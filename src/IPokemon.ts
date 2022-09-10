@@ -10,3 +10,7 @@ export interface IPokemonBase {
     name: string;
     url: string;
 }
+export interface IPokemonState {
+    payload: IPokemon[];
+    
+}
