@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import getApi from '../services/fromAxios';
+
 
 import Search from '../components/search/Search';
 import Pokemon from '../components/pokelist/Pokemon';
@@ -16,33 +16,15 @@ const PokeDex: React.FC = () => {
     const [offsetPokemon, setOffsetPokemon] = useState<number>(NUMBER_LIMIT);
     const [loadingHome, setLoadingHome] = useState<boolean>(true);
     const prevScrollY = useRef(0);
-    const load = async (offset: number) => {
-        const res = await getApi.get(`pokemon/`, {
-            params: {
-                limit: NUMBER_LIMIT,
-                offset: offset,
-            }
-        })
-        await res.data.results.forEach(async (pokemon: IPokemonBase) => {
-            const results = await getApi.get(`pokemon/${pokemon.name}`)
-            setDefaultPokemons((index) => [...index, {
-                id: results.data.id,
-                name: pokemon.name,
-                type: results.data.types.map((type: any) => type.type.name),
-            }])
-        })
-        setTimeout(() => {
-            setLoadingHome(false);
-        }, 1000)
-    }
+  
+       
     const loadMorePokemons = (async (offset: any) => {
-        load(offset);
+        
         console.log(offset);
         console.log(NUMBER_LIMIT);
         setOffsetPokemon(index => index + NUMBER_LIMIT);
     });
     const getDefaultPokemons = useCallback(async () => {
-        load(0);
     }, []);
     useEffect(() => {
         getDefaultPokemons();

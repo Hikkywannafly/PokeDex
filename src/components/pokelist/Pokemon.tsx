@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { typeColors, backgroundColor } from '../../globals'
 import { IPokemon } from '../../IPokemon';
-import { startLoading, stopLoading } from '../../store/pokemonSlice';
+// import { startLoading, stopLoading } from '../../store/pokemonSlice';
 type colors = keyof typeof typeColors;
 type bg = keyof typeof backgroundColor;
 
@@ -15,11 +15,11 @@ const Pokemon: React.FC = () => {
     const pokemonState = useSelector((state: any) => state.pokemon)
     const { isLoading, pokemonLength, pokemon } = pokemonState
     useEffect(() => {
-        if (pokemonLength && isLoading) dispatch(stopLoading())
-        // on unmount
-        return () => {
-            dispatch(startLoading())
-        }
+        // if (pokemonLength && isLoading) dispatch(stopLoading())
+        // // on unmount
+        // return () => {
+        //     dispatch(startLoading())
+        // }
     }, []);
     // useEffect(() => {
     //     setShowPokemon(pokemon);

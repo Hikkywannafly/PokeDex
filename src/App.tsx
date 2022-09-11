@@ -4,26 +4,24 @@ import React, { useEffect } from 'react'
 import { FiArrowUp } from 'react-icons/fi'
 import FloatingButton from './components/floatingButton/FloatingButton';
 import Header from './components/header/Header';
-import store from './store/store';
 import { Provider } from 'react-redux';
-import getAllPokemonList from './store/pokemonSlice';
-
+import { useAppDispatch } from './hooks/useType'
+import { getPokemonList } from './features/PokemonSlice';
 type Props = {}
 const App: React.FC = () => {
+  const dispatch = useAppDispatch();
   useEffect(() => {
-
-    store.dispatch(getAllPokemonList())
-
+    dispatch(getPokemonList());
   }, [])
   return (
     <>
-      <Provider store={store}>
-        <FloatingButton />
-        <Header />
-        <div className="w-full  m-0 p-0 font-fira ">
-          <PokeDex />
-        </div>
-      </Provider>
+
+      <FloatingButton />
+      <Header />
+      <div className="w-full  m-0 p-0 font-fira ">
+        <PokeDex />
+      </div>
+
     </>
   );
 }
