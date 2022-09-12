@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { IPokemon, IPokemonBase } from '../IPokemon';
 import fromApi from '../services/fromApi';
 import axios from '../services/axios';
@@ -8,11 +8,10 @@ export const getPokemonList = createAsyncThunk(
         try {
             const res = await axios(`/pokemon`, {
                 params: {
-                    limit: 6,
-                    offset: 0,
+                    limit: 16,
                 }
-            });
-            console.log(res.data.results)
+            })
+
             return res.data.results;
         }
         catch (err: any) {
@@ -40,8 +39,8 @@ const PokemonSlice = createSlice({
             state.isLoading = true;
             state.error = null;
         },
-        stopLoading(state, action) {
-            state.pokemon = action.payload;
+        stopLoading(state, action: PayloadAction<any>) {
+            state.pokemon = action?.payload;
             state.isLoading = false;
         }
     },
@@ -49,17 +48,23 @@ const PokemonSlice = createSlice({
         builder.addCase(getPokemonList.pending, state => {
             state.isLoading = true
         })
-        builder.addCase(getPokemonList.fulfilled, (state, action) => {
-            state.pokemon = action.payload;
+        builder.addCase(getPokemonList.fulfilled, (state, action: PayloadAction<any>) => {
+            const pokemonList = action.payload;
+            pokemonList.map((pokemon: IPokemonBase, index: number) => {
+                pokemon.id = index + 1;
+                return pokemon;
+            })
+            state.pokemon = pokemonList;
+            state.pokemonLength = pokemonList.length;
             state.isLoading = false;
         })
-        builder.addCase(getPokemonList.rejected, (state, action) => {
+        builder.addCase(getPokemonList.rejected, (state, action: PayloadAction<any>) => {
             state.error = action.payload;
             state.isLoading = false
         })
     }
 
 })
-
+// export const { startLoading, stopLoading } = PokemonSlice.actions
 export default PokemonSlice.reducer;
 

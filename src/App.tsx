@@ -1,27 +1,34 @@
 
 import PokeDex from './container/PokeDex';
-import React, { useEffect } from 'react'
-import { FiArrowUp } from 'react-icons/fi'
+import React, { useEffect, useState } from 'react'
 import FloatingButton from './components/floatingButton/FloatingButton';
 import Header from './components/header/Header';
-import { Provider } from 'react-redux';
 import { useAppDispatch } from './hooks/useType'
 import { getPokemonList } from './features/PokemonSlice';
+import { useSelector } from 'react-redux';
+import LoadingHome from './components/loading/LoadingHome';
 type Props = {}
 const App: React.FC = () => {
+  const [isLoadingHome, setIsLoadingHome] = useState(true);
   const dispatch = useAppDispatch();
+  const pokemonState = useSelector((state: any) => state)
+  const { isLoading, pokemonLength } = pokemonState
   useEffect(() => {
-    dispatch(getPokemonList());
-  }, [])
+    if (pokemonLength === 0 && isLoading) {
+      dispatch(getPokemonList());
+    }
+    setTimeout(() => {
+      setIsLoadingHome(isLoading);
+    }, 1000)
+  }, [pokemonLength]);
   return (
     <>
-
       <FloatingButton />
       <Header />
-      <div className="w-full  m-0 p-0 font-fira ">
+      <LoadingHome loading={isLoadingHome} />
+      <div className="w-full m-0 p-0 font-fira ">
         <PokeDex />
       </div>
-
     </>
   );
 }
