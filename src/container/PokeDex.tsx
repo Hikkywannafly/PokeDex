@@ -1,6 +1,4 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-
-
 import Search from '../components/search/Search'
 import Filter from '../components/filter/Filter';
 import PokemonList from '../components/pokelist/PokemonList';
@@ -12,9 +10,7 @@ const PokeDex: React.FC = () => {
     const pokemonState = useSelector((state: any) => state.pokemon);
     const { pokemon } = pokemonState;
     const [pokemonList, setPokemonList] = useState<any>([]);
-    useEffect(() => {
 
-    }, [])
 
     return (
         <>

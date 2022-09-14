@@ -7,7 +7,7 @@ import { useAppDispatch } from './hooks/useType'
 import { getPokemonList } from './features/PokemonSlice';
 import { useSelector } from 'react-redux';
 import LoadingHome from './components/loading/LoadingHome';
-type Props = {}
+import { startLoading, stopLoading } from './features/PokemonSlice';
 const App: React.FC = () => {
   const [isLoadingHome, setIsLoadingHome] = useState(true);
   const dispatch = useAppDispatch();
@@ -21,6 +21,13 @@ const App: React.FC = () => {
       setIsLoadingHome(isLoading);
     }, 1000)
   }, [pokemonLength]);
+  useEffect(() => {
+    if (pokemonLength && isLoading) dispatch(stopLoading(1))
+    // on unmount
+    return () => {
+      dispatch(startLoading())
+    }
+  }, [])
   return (
     <>
       <FloatingButton />

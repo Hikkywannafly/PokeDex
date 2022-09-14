@@ -8,10 +8,9 @@ export const getPokemonList = createAsyncThunk(
         try {
             const res = await axios(`/pokemon`, {
                 params: {
-                    limit: 16,
+                    limit: 100,
                 }
             })
-
             return res.data.results;
         }
         catch (err: any) {
@@ -65,6 +64,6 @@ const PokemonSlice = createSlice({
     }
 
 })
-// export const { startLoading, stopLoading } = PokemonSlice.actions
+export const { startLoading, stopLoading } = PokemonSlice.actions
 export default PokemonSlice.reducer;
 
