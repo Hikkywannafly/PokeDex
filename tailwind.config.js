@@ -25,9 +25,9 @@ module.exports = {
           "100%": { top: `2px` },
         },
         pokePre: {
-          "0%": { transform: `translateY(-5px)` },
-          "50%": { transform: `translateY(5px)` },
-          " 100%": { transform: `translateY(-5px)` },
+          "0%": { transform: `translateY(-8px)` },
+          "50%": { transform: `translateY(8px)` },
+          " 100%": { transform: `translateY(-8px)` },
         }
       },
       animation: {

@@ -59,10 +59,7 @@ const InfinityScroll = (props: Props) => {
     }, [pokemonList]);
 
     useEffect(() => {
-        console.log(`node`, node)
         if (showList.length > 0) {
-            console.log('disconnect page current ', currentPage);
-            console.log('showList', showList);
             const options = {
                 root: null,
                 rootMargin: '0px',
@@ -88,18 +85,25 @@ const InfinityScroll = (props: Props) => {
     useEffect(() => {
         sliceNewPage(currentPage, false);
     }, [currentPage]);
-
+    
     return (
         <>
-            <div className="pokemon-list  grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4  gap-8 w-ful  ">
+            <div className="pokemon-list  grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 w-ful  ">
                 {
                     showList.map((pokemon: any) => (
                         <PokemonCard key={pokemon.id} data={pokemon} />
                     ))
                 }
             </div>
+
             {showList.length > 0 && showList.length !== pokemonList.length &&
-                (<div ref={setNode} >Loading...</div>)
+                (
+                    <div className="flex justify-center items-center my-10">
+                        <LoadingMore />
+                        <div ref={setNode} ></div>
+                    </div>
+                )
+
             }
 
         </>

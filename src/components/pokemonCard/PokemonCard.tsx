@@ -38,7 +38,7 @@ const PokemonCard = ({ data }: IProps) => {
                                 preview={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
                                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`}
                                 render={(src, style) => (
-                                    <img className='w-[60%]' src={src} style={style} alt={name} />
+                                    <img className='w-[50%] group-hover:animate-newton  ease-in duration-150 z-10 my-4" ' src={src} style={style} alt={name} />
                                 )}
                             />
 
