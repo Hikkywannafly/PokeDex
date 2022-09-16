@@ -8,7 +8,7 @@ export const getPokemonList = createAsyncThunk(
         try {
             const res = await axios(`/pokemon`, {
                 params: {
-                    limit: 100,
+                    limit: 10000,
                 }
             })
             return res.data.results;

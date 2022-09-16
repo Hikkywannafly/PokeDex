@@ -24,7 +24,7 @@ const PokemonList: React.FC = ({ data }: any) => {
                 } */}
             </div>
             {
-                pokemon.length > 0 && <InfinityScroll sizes={16} pokemonList={showPokemon} />
+                pokemon.length > 0 && <InfinityScroll sizes={8} pokemonList={showPokemon} />
             }
         </>
 

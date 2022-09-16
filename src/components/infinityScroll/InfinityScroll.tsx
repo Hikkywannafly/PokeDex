@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { setTimeout } from 'timers/promises';
 import PokemonCard from '../pokemonCard/PokemonCard';
 type Props = {
     sizes: number,
@@ -7,22 +8,24 @@ type Props = {
 
 const InfinityScroll = (props: Props) => {
     const { sizes, pokemonList } = props;
+
     const [currentPage, setCurrentPage] = useState(1);
     const [prevY, setPrevY] = useState(1);
     const [showList, setShowList] = useState<any>([]);
     const [node, setNode] = useState<any>(null);
     const observer = useRef<IntersectionObserver | null>(null);
-
-    const sliceNewPage = (page: number, listUpdate: any) => {
+    // slice the page 
+    const sliceNewPage = (page: number, listUpdate: boolean) => {
         const newPage = pokemonList.slice(
             page === 1 ? 0 : (page - 1) * sizes,
             page * sizes
         )
+        console.log(`set New Page`, newPage);
         listUpdate ?
             setShowList([...newPage]) :
             setShowList([...showList, ...newPage])
 
-        console.log(newPage);
+
     }
 
     const handelObserver = (entries: any) => {
@@ -31,27 +34,44 @@ const InfinityScroll = (props: Props) => {
             boundingClientRect,
             intersectionRatio
         } = entries[0];
+        console.log('>>check boudingClientRect , ', boundingClientRect.y)
+        console.log('>>check prevY , ', prevY)
         if (isIntersecting &&
             intersectionRatio === 1 &&
             boundingClientRect.y > prevY) {
+
+            console.log('boundingClientRect', boundingClientRect.y)
+
+            console.log('preY', prevY)
+
             setPrevY(boundingClientRect.y - 100)
             setCurrentPage(currentPage + 1);
+            console.warn(`run handelObserver`);
+
         }
     }
     useEffect(() => {
-        setShowList([]);
-        setPrevY(0);
-        if (currentPage !== 1) {
-            setCurrentPage(1);
-        } else {
-            sliceNewPage(currentPage, true);
-            console.log('currentPage1', currentPage);
+        if (pokemonList.length > 0) {
+            setShowList([]);
+
+            setPrevY(0);
+
+            if (currentPage !== 1) {
+                console.log('>>check currentPage khavc', currentPage)
+                setCurrentPage(1);
+
+            } else {
+                console.log('current page start', currentPage);
+                sliceNewPage(currentPage, true);
+                console.log('inital start currentPage', currentPage);
+            }
         }
     }, [pokemonList]);
 
     useEffect(() => {
-        console.log('currentPage', currentPage);
+        console.log(`node`, node)
         if (showList.length > 0) {
+            console.log('disconnect page current ', currentPage);
             console.log('showList', showList);
             const options = {
                 root: null,
@@ -60,18 +80,22 @@ const InfinityScroll = (props: Props) => {
             };
             if (observer.current) observer.current.disconnect();
 
-            observer.current = new IntersectionObserver(handelObserver, options);
+            observer.current = new IntersectionObserver(
+                handelObserver,
+                options
+            );
 
             const { current: currentObserver } = observer
 
             if (node) observer.current.observe(node);
 
-            return () => currentObserver.disconnect()
+            return () => {
+                if (currentObserver) currentObserver.disconnect();
+            };
         }
-    }, [node, currentPage]);
-
+    }, [currentPage, node]);
     useEffect(() => {
-        sliceNewPage(currentPage, false)
+        sliceNewPage(currentPage, false);
     }, [currentPage]);
 
     return (
@@ -83,7 +107,11 @@ const InfinityScroll = (props: Props) => {
                     ))
                 }
             </div>
-            <div ref={setNode}> ds</div>
+            {/* <div ref={setNode}>Loading...</div> */}
+            {showList.length > 0 && showList.length !== pokemonList.length &&
+                (<div ref={setNode}>Loading...</div>)
+            }
+
         </>
     )
 }
