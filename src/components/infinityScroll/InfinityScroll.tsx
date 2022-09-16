@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { setTimeout } from 'timers/promises';
+import LoadingMore from '../loading/LoadingMore';
 import PokemonCard from '../pokemonCard/PokemonCard';
 type Props = {
     sizes: number,
@@ -20,12 +20,9 @@ const InfinityScroll = (props: Props) => {
             page === 1 ? 0 : (page - 1) * sizes,
             page * sizes
         )
-        console.log(`set New Page`, newPage);
         listUpdate ?
             setShowList([...newPage]) :
             setShowList([...showList, ...newPage])
-
-
     }
 
     const handelObserver = (entries: any) => {
@@ -34,20 +31,11 @@ const InfinityScroll = (props: Props) => {
             boundingClientRect,
             intersectionRatio
         } = entries[0];
-        console.log('>>check boudingClientRect , ', boundingClientRect.y)
-        console.log('>>check prevY , ', prevY)
         if (isIntersecting &&
             intersectionRatio === 1 &&
             boundingClientRect.y > prevY) {
-
-            console.log('boundingClientRect', boundingClientRect.y)
-
-            console.log('preY', prevY)
-
-            setPrevY(boundingClientRect.y - 100)
+            setPrevY(boundingClientRect.y - 50)
             setCurrentPage(currentPage + 1);
-            console.warn(`run handelObserver`);
-
         }
     }
     useEffect(() => {
@@ -57,13 +45,15 @@ const InfinityScroll = (props: Props) => {
             setPrevY(0);
 
             if (currentPage !== 1) {
-                console.log('>>check currentPage khavc', currentPage)
+
                 setCurrentPage(1);
 
             } else {
-                console.log('current page start', currentPage);
-                sliceNewPage(currentPage, true);
-                console.log('inital start currentPage', currentPage);
+                setTimeout(() => {
+                    sliceNewPage(currentPage, true);
+                }, 1200);
+
+
             }
         }
     }, [pokemonList]);
@@ -94,22 +84,22 @@ const InfinityScroll = (props: Props) => {
             };
         }
     }, [currentPage, node]);
+
     useEffect(() => {
         sliceNewPage(currentPage, false);
     }, [currentPage]);
 
     return (
         <>
-            <div className="pokemon-list flex flex-row flex-wrap gap-8 lg:gap-10 w-ful  ">
+            <div className="pokemon-list  grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4  gap-8 w-ful  ">
                 {
                     showList.map((pokemon: any) => (
                         <PokemonCard key={pokemon.id} data={pokemon} />
                     ))
                 }
             </div>
-            {/* <div ref={setNode}>Loading...</div> */}
             {showList.length > 0 && showList.length !== pokemonList.length &&
-                (<div ref={setNode}>Loading...</div>)
+                (<div ref={setNode} >Loading...</div>)
             }
 
         </>

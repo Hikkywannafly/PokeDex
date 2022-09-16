@@ -1,7 +1,9 @@
 
 import { useDispatch, useSelector } from "react-redux";
-import type { TypedUseSelectorHook } from "react-redux";
-import type { RootState, AppDispatch } from "../features/store";
 
-export const useAppDispatch: () => AppDispatch = useDispatch;
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+const useIntersectionObserver =
+    (callback: any, currentPage: number, node: IntersectionObserver) => {
+        
+
+}
+

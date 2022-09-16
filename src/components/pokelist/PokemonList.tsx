@@ -18,13 +18,12 @@ const PokemonList: React.FC = ({ data }: any) => {
     }, [pokemon]);
     return (
         <>
-            <div className="pokemon-list flex flex-row flex-wrap gap-8 lg:gap-10 w-ful  ">
-                {/* {showPokemon &&
-                    (showPokemon.map((pokemon: IPokemonBase) => { return <PokemonCard key={pokemon.id} data={pokemon} /> }))
-                } */}
-            </div>
             {
-                pokemon.length > 0 && <InfinityScroll sizes={8} pokemonList={showPokemon} />
+                pokemon.length > 0 &&
+                <InfinityScroll
+                    sizes={6}
+                    pokemonList={showPokemon}
+                />
             }
         </>
 
