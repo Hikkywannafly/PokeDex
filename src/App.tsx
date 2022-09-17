@@ -33,7 +33,7 @@ const App: React.FC = () => {
       <FloatingButton />
       <Header />
       <LoadingHome loading={isLoadingHome} />
-      <div className="w-full m-0 p-0 font-fira ">
+      <div className="w-full h-screen bg-[#f6f8fc] m-0 p-0 font-fira ">
         <PokeDex />
       </div>
     </>

@@ -31,7 +31,7 @@ module.exports = {
         }
       },
       animation: {
-        aniLoad: 'loading ease-in-out 1s forwards',
+        aniLoad: 'loading ease-in-out 0.5s forwards',
         aniLoadIcon: 'loadingIcon ease-in-out 2s infinite',
         aniload1: 'loading1 ease-in-out 3s infinite',
         newton: 'pokePre ease-in-out 3s infinite',

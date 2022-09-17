@@ -16,7 +16,8 @@ const PokemonCard = ({ data }: IProps) => {
     const [isDone, setIsDone] = useState(false);
     const pokemonCall = async (pokemon: IPokemonBase) => {
         const res = await axios.get(pokemon.url);
-        setPokemon({ id: id, name: name, type: res.data.types.map((type: any) => type.type.name) });
+        setPokemon({ id: id, name: name, sprites: res.data.sprites, type: res.data.types.map((type: any) => type.type.name) });
+        console.log(res.data.sprites);
         setIsDone(true);
     }
     useEffect(() => {
@@ -35,8 +36,10 @@ const PokemonCard = ({ data }: IProps) => {
                         </div>
                         <div className=" flex justify-center">
                             <ProgressiveImage
-                                preview={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
-                                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`}
+                                preview={pokemon.sprites.other["official-artwork"].front_default || `./pokemonheader/log2.png`}
+                                // src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg` || pokemon.sprites.orther["official-artwork"].front_default}
+                                // src={pokemon.sprites.other["official-artwork"].front_default}
+                                src={pokemon.sprites.other["dream_world"].front_default || pokemon.sprites.other["official-artwork"].front_default || `./pokemonheader/log2.png`}
                                 render={(src, style) => (
                                     <img className='w-[50%] group-hover:animate-newton  ease-in duration-150 z-10 my-4" ' src={src} style={style} alt={name} />
                                 )}

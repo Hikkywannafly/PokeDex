@@ -1,15 +1,20 @@
 import React from 'react'
 
-type Props = {}
-const Search: React.FC = (props: Props) => {
+type Props = {
+    handleSearch: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
+const Search = (Props: Props) => {
+    const { handleSearch } = Props
+
     return (
         <>
             <div className="search  mb-10">
                 <div className="w-full">
                     <div className="flex">
-
                         <div className="relative w-full flex-1">
-                            <input type="search" id="search-dropdown" className="outline-none drop-shadow-[0_10px_10px_#ededed] lg:p-4  p-3 block  w-full z-20 text-sm lg:text-base text-gray-900  rounded-lg   hover:drop-shadow-[1px_1px_3px_#acd6ff] duration-150 " placeholder="Search your Pokemon" required>
+                            <input
+                                onChange={handleSearch}
+                                type="search" id="search-dropdown" className="outline-none drop-shadow-[0_10px_10px_#ededed] lg:p-4  p-3 block  w-full z-20 text-sm lg:text-base text-gray-900  rounded-lg   hover:drop-shadow-[1px_1px_3px_#acd6ff] duration-150 " placeholder="Search your Pokemon" required>
                             </input>
                             <button type="submit" className="absolute p-1 top-2 right-2  lg:p-2 lg:top-2.5 lg:right-3
                         text-sm font-medium text-white bg-[#ff5350] rounded-lg border
