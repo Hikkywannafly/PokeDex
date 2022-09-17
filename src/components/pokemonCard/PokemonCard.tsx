@@ -17,7 +17,6 @@ const PokemonCard = ({ data }: IProps) => {
     const pokemonCall = async (pokemon: IPokemonBase) => {
         const res = await axios.get(pokemon.url);
         setPokemon({ id: id, name: name, sprites: res.data.sprites, type: res.data.types.map((type: any) => type.type.name) });
-        console.log(res.data.sprites);
         setIsDone(true);
     }
     useEffect(() => {

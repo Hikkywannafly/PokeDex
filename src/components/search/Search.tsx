@@ -8,7 +8,7 @@ const Search = (Props: Props) => {
 
     return (
         <>
-            <div className="search  mb-10">
+            <div className="search mb-6">
                 <div className="w-full">
                     <div className="flex">
                         <div className="relative w-full flex-1">

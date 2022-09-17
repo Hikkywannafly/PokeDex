@@ -43,66 +43,6 @@ export const backgroundColor = {
 
 };
 
-// // switch (type1) {
-// //     case "grass":
-// //         color1 = "#a8ff98";
-// //         break;
-// //     case "poison":
-// //         color1 = "#d6a2e4";
-// //         break;
-// //     case "normal":
-// //         color1 = "#dcdcdc";
-// //         break;
-// //     case "fire":
-// //         color1 = "#ffb971";
-// //         break;
-// //     case "water":
-// //         color1 = "#8cc4e2";
-// //         break;
-// //     case "electric":
-// //         color1 = "#ffe662";
-// //         break;
-// //     case "ice":
-// //         color1 = "#8cf5e4";
-// //         break;
-// //     case "fighting":
-// //         color1 = "#da7589";
-// //         break;
-// //     case "ground":
-// //         color1 = "#e69a74";
-// //         break;
-// //     case "flying":
-// //         color1 = "#bbc9e4";
-// //         break;
-// //     case "psychic":
-// //         color1 = "#ffa5da";
-// //         break;
-// //     case "bug":
-// //         color1 = "#bae05f";
-// //         break;
-// //     case "rock":
-// //         color1 = "#C9BB8A";
-// //         break;
-// //     case "ghost":
-// //         color1 = "#8291e0";
-// //         break;
-// //     case "dark":
-// //         color1 = "#8e8c94";
-// //         break;
-// //     case "dragon":
-// //         color1 = "#88a2e8";
-// //         break;
-// //     case "steel":
-// //         color1 = "#9fb8b9";
-// //         break;
-// //     case "fairy":
-// //         color1 = "#fdb9e9";
-// //         break;
-// //     default:
-// //         color1 = "gainsboro";
-// //         break;
-
-
 export enum HTTP_METHODS {
     GET = "GET",
     POST = "POST",
@@ -111,12 +51,78 @@ export enum HTTP_METHODS {
     PATCH = "PATCH",
 }
 
-export enum PokemonGenerationsEnum {
-    GENERATION_1 = "151",
-    GENERATION_2 = "251",
-    GENERATION_3 = "386",
-    GENERATION_4 = "494",
-    GENERATION_5 = "649",
-    GENERATION_6 = "721",
-    GENERATION_7 = "809",
+export const PokemonGenerationsEnum = {
+    GENERATION_1: "151",
+    GENERATION_2: "251",
+    GENERATION_3: "386",
+    GENERATION_4: "494",
+    GENERATION_5: "649",
+    GENERATION_6: "721",
+    GENERATION_7: "809",
+}
+
+export const PokemonGenerations = [
+    {
+        name: "All",
+        value: "null",
+    },
+    {
+        name: "Generation 1",
+        value: PokemonGenerationsEnum.GENERATION_1
+    },
+    {
+        name: "Generation 2",
+        value: PokemonGenerationsEnum.GENERATION_2
+    },
+    {
+        name: "Generation 3",
+        value: PokemonGenerationsEnum.GENERATION_3
+    },
+    {
+        name: "Generation 4",
+        value: PokemonGenerationsEnum.GENERATION_4
+    },
+    {
+        name: "Generation 5",
+        value: PokemonGenerationsEnum.GENERATION_5
+    },
+    {
+        name: "Generation 6",
+        value: PokemonGenerationsEnum.GENERATION_6
+    },
+    {
+        name: "Generation 7",
+        value: PokemonGenerationsEnum.GENERATION_7
+    }
+]
+
+export const TypePokemons = [
+    {
+        name: "Sort by id",
+    },
+    {
+        name: "Sort by name",
+    }
+]
+
+export const mapIdToGeneration = (id: any) => {
+    if (id <= 151) {
+        return 'Generation 1'
+    } else if (id > 151 && id <= 251) {
+        return 'Generation 2'
+    } else if (id > 251 && id <= 386) {
+        return 'Generation 3'
+    } else if (id > 386 && id <= 493) {
+        return 'Generation 4'
+    } else if (id > 483 && id <= 649) {
+        return 'Generation 5'
+    } else if (id > 649 && id <= 721) {
+        return 'Generation 6'
+    } else if (id > 721 && id <= 809) {
+        return 'Generation 7'
+    } /** else if (id > 809 && id <= 898) {
+      return 'generation-viii'
+    } */ else {
+        return 'all'
+    }
 }

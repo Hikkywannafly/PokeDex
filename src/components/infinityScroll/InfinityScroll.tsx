@@ -39,23 +39,20 @@ const InfinityScroll = (props: Props) => {
         }
     }
     useEffect(() => {
-        if (pokemonList.length > 0) {
-            setShowList([]);
+        // if (pokemonList.length > 0) {
+        console.log(`change`);
+        setShowList([]);
 
-            setPrevY(0);
+        setPrevY(0);
 
-            if (currentPage !== 1) {
-
-                setCurrentPage(1);
-
-            } else {
-                setTimeout(() => {
-                    sliceNewPage(currentPage, true);
-                }, 1200);
-
-
-            }
+        if (currentPage !== 1) {
+            setCurrentPage(1);
+        } else {
+            setTimeout(() => {
+                sliceNewPage(currentPage, true);
+            }, 1200);
         }
+        // }
     }, [pokemonList]);
 
     useEffect(() => {
@@ -85,7 +82,7 @@ const InfinityScroll = (props: Props) => {
     useEffect(() => {
         sliceNewPage(currentPage, false);
     }, [currentPage]);
-    
+
     return (
         <>
             <div className="pokemon-list  grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 w-ful  ">

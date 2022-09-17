@@ -22,6 +22,7 @@ const App: React.FC = () => {
     }, 1000)
   }, [pokemonLength]);
   useEffect(() => {
+    console.log('test')
     if (pokemonLength && isLoading) dispatch(stopLoading(1))
     // on unmount
     return () => {
@@ -30,11 +31,13 @@ const App: React.FC = () => {
   }, [])
   return (
     <>
-      <FloatingButton />
-      <Header />
-      <LoadingHome loading={isLoadingHome} />
-      <div className="w-full h-screen bg-[#f6f8fc] m-0 p-0 font-fira ">
-        <PokeDex />
+      <div className="bg-[#f6f8fc]">
+        <FloatingButton />
+        <Header />
+        <LoadingHome loading={isLoadingHome} />
+        <div className="w-full  bg-[#f6f8fc] m-0 p-0 font-fira ">
+          <PokeDex />
+        </div>
       </div>
     </>
   );
