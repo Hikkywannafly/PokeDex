@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-
 type Props = {
     data: any,
     handleFilter: any

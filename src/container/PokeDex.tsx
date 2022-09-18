@@ -24,9 +24,9 @@ const PokeDex: React.FC = () => {
                             {pokemonList}
                         </div>
                     </div>
-                    <div className="show-pokemon-detail hidden md:block ">
+                    {/* <div className="show-pokemon-detail hidden md:block ">
                         <PokemonDetail />
-                    </div>
+                    </div> */}
                 </main>
             </div>
         </>

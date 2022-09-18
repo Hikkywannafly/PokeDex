@@ -8,38 +8,52 @@ import InfinityScroll from '../infinityScroll/InfinityScroll';
 const PokemonList: React.FC = ({ data }: any) => {
     const pokemon = useSelector((state: any) => state.pokemon)
     const [showPokemon, setShowPokemon] = useState<IPokemonBase[]>([]);
-    const [generation, setGeneration] = useState<string>('All');
+    const [generation, setGeneration] = useState<string>('all');
     const [sortBy, setSortBy] = useState<string>('id');
     const handleSearch = (e: any) => {
         const search = e.target.value;
-        const filteredPokemon = pokemon.filter((pokemon: any) => {
+        const _ = pokemon.filter((pokemon: any) => {
             return pokemon.name.toLowerCase().includes(search.toLowerCase());
         });
-        setShowPokemon(filteredPokemon);
+        setShowPokemon(sortPokemon(_, sortBy));
 
     }
+    const sortPokemon = (pokemonList: any, sortBy: any) =>
+        [...pokemonList].sort((a, b) => {
+            if (a[`${sortBy}`] > b[`${sortBy}`]) return 1
+            if (a[`${sortBy}`] < b[`${sortBy}`]) return -1
+            return 0
+        })
     const handleFilter = (e: any) => {
         const filter = e.target.value;
-        if (filter === 'All') return
-        const filteredPokemon = pokemon.filter(
-            (pokemon: any) => filter === mapIdToGeneration(pokemon.id)
-        )
-        setShowPokemon(filteredPokemon);
+        // trigger filter
+        // eslint-disable-next-line array-callback-return
+        PokemonGenerations.filter((generation: any): void => {
+            const _ = generation.name.toLowerCase().trim() === (filter.toLowerCase()).trim();
+            if (_) setGeneration(generation.name.toLowerCase().trim());
+        })
+        return 0;
+    }
+    const handleSort = (e: any) => {
+        const sort = e.target.value;
+        setSortBy(sort.split(" ").pop());
     }
     useEffect(() => {
-        console.log(`test2`)
-        if (pokemon.length > 0) {
-            setShowPokemon(pokemon);
+        showPokemon?.length && setShowPokemon(sortPokemon(showPokemon, sortBy))
+    }, [sortBy])
+    useEffect(() => {
+        console.log(generation);
+        if (generation && generation !== 'all') {
+            const filteredPokemon = pokemon.filter(
+                (pokemon: any) => generation === mapIdToGeneration(pokemon.id)
+            )
+            setShowPokemon(sortPokemon(filteredPokemon, sortBy));
         }
-    }, [pokemon]);
-    // useEffect(() => {
-    //     if (generation === 'All') {
-    //         setShowPokemon(pokemon);
-    //     }
-    //     else {
-
-    //     }
-    // }, [generation])
+        else {
+            ;
+            setShowPokemon(sortPokemon(pokemon, sortBy));
+        }
+    }, [generation, pokemon])
     return (
         <>
             <Search handleSearch={handleSearch} />
@@ -47,7 +61,7 @@ const PokemonList: React.FC = ({ data }: any) => {
             <div className="search-type mb-5">
                 <div className="flex flex-row justify-between">
                     <Filter handleFilter={handleFilter} data={PokemonGenerations} />
-                    {/* <Filter data={TypePokemons} /> */}
+                    <Filter data={TypePokemons} handleFilter={handleSort} />
                 </div>
             </div>
 

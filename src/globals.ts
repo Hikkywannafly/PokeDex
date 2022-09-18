@@ -107,19 +107,19 @@ export const TypePokemons = [
 
 export const mapIdToGeneration = (id: any) => {
     if (id <= 151) {
-        return 'Generation 1'
+        return 'generation 1'
     } else if (id > 151 && id <= 251) {
-        return 'Generation 2'
+        return 'generation 2'
     } else if (id > 251 && id <= 386) {
-        return 'Generation 3'
+        return 'generation 3'
     } else if (id > 386 && id <= 493) {
-        return 'Generation 4'
+        return 'generation 4'
     } else if (id > 483 && id <= 649) {
-        return 'Generation 5'
+        return 'generation 5'
     } else if (id > 649 && id <= 721) {
-        return 'Generation 6'
+        return 'generation 6'
     } else if (id > 721 && id <= 809) {
-        return 'Generation 7'
+        return 'generation 7'
     } /** else if (id > 809 && id <= 898) {
       return 'generation-viii'
     } */ else {

@@ -102,6 +102,18 @@ const InfinityScroll = (props: Props) => {
                 )
 
             }
+            {
+                pokemonList.length === 0 && showList.length === 0 && (
+                    <div className="flex flex-col justify-center items-center my-20">
+                        <img
+                            className=" transition duration-500 ease-in-out transform cursor-pointer w-20 h-20 mb-5"
+                            alt="Pokeball"
+                            src='https://i.pinimg.com/originals/fe/61/dc/fe61dc2b7ef08a538b906eced7fa5cb5.gif'
+                        />
+                        <h1 className="text-center text-lg font-bold"> NO POKEMON FOUND</h1>
+                    </div>
+                )
+            }
 
         </>
     )
