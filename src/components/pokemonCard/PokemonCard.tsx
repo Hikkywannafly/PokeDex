@@ -31,7 +31,7 @@ const PokemonCard = ({ data }: IProps) => {
                         className=" relative rounded-xl drop-shadow-[0px_0px_1.25rem_0px_red] w-full h-60 md:h-72
             flex-1 normal-case  flex flex-col justify-between items-center cursor-pointer mt-[10px] pt-6 pb-3  group hover:rounded-[20px] duration-500 hover:drop-shadow-[0px_0px_1.25rem_0px_red]  hover:translate-y-[-10px]  ">
                         <div className="flex justify-items-end">
-                            <span className=" text-xl font-semibold text-black text-opacity-25 pointer-events-none absolute top-3 left-3"> Nº {id}</span>
+                            <span className=" text-2xl font-semibold text-black text-opacity-25 pointer-events-none absolute top-3 left-3"> Nº {id}</span>
                         </div>
                         <div className=" flex justify-center">
                             <ProgressiveImage
@@ -50,7 +50,7 @@ const PokemonCard = ({ data }: IProps) => {
                             <div className="ability flex flex-row mb-1.5">
                                 {pokemon.type.map((item: any) =>
                                     <div key={item} style={{ backgroundColor: typeColors[item as colors] }}
-                                        className='font-[700] opacity-[0.8] rounded-[5px] text-[11px] tracking-widest px-1 mx-1 flex items-center uppercase'> <span> {item} </span>
+                                        className='font-[700] opacity-[0.8] rounded-[5px] text-[11px] tracking-widest px-1 mx-1 flex items-center uppercase lg:p-[3px] lg:py-[2px] lg:text-[12px]'> <span> {item} </span>
                                     </div>
                                 )}
                             </div>

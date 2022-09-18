@@ -1,6 +1,7 @@
 
 import PokeDex from './container/PokeDex';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Router } from 'react-router-dom';
 import FloatingButton from './components/floatingButton/FloatingButton';
 import Header from './components/header/Header';
 import { useAppDispatch } from './hooks/useType'
@@ -35,7 +36,7 @@ const App: React.FC = () => {
         <FloatingButton />
         <Header />
         <LoadingHome loading={isLoadingHome} />
-        <div className="w-full  bg-[#f6f8fc] m-0 p-0 font-fira ">
+        <div className="w-full bg-[#f6f8fc] m-0 p-0 font-fira ">
           <PokeDex />
         </div>
       </div>
