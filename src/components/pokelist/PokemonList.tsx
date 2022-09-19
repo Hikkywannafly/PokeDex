@@ -71,7 +71,7 @@ const PokemonList: React.FC = ({ data }: any) => {
             <div className="search-type mb-5">
                 <div className="flex flex-row justify-between">
                     <Filter handleFilter={handleFilter} data={PokemonGenerations} reset={reset} />
-                    <h1 className="  text-[20px] font-medium"> Available {showPokemon?.length}</h1>
+                    {/* <h1 className="  text-[20px] font-medium"> Available {showPokemon?.length}</h1> */}
                     <div className="flex flex-row gap-3">
                         <Filter data={TypePokemons} handleFilter={handleSort} reset={reset} />
                         <Reset handleReset={handleReset} />

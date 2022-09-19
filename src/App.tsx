@@ -1,7 +1,7 @@
 
 import PokeDex from './container/PokeDex';
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Router } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import FloatingButton from './components/floatingButton/FloatingButton';
 import Header from './components/header/Header';
 import { useAppDispatch } from './hooks/useType'
@@ -9,6 +9,7 @@ import { getPokemonList } from './features/PokemonSlice';
 import { useSelector } from 'react-redux';
 import LoadingHome from './components/loading/LoadingHome';
 import { startLoading, stopLoading } from './features/PokemonSlice';
+import { RouterPoke } from './router/Router';
 const App: React.FC = () => {
   const [isLoadingHome, setIsLoadingHome] = useState(true);
   const dispatch = useAppDispatch();
@@ -23,11 +24,10 @@ const App: React.FC = () => {
     }, 1000)
   }, [pokemonLength]);
   useEffect(() => {
-    console.log('test')
     if (pokemonLength && isLoading) dispatch(stopLoading(1))
     // on unmount
     return () => {
-      dispatch(startLoading())
+      dispatch(startLoading());
     }
   }, [])
   return (
@@ -37,7 +37,10 @@ const App: React.FC = () => {
         <Header />
         <LoadingHome loading={isLoadingHome} />
         <div className="w-full bg-[#f6f8fc] m-0 p-0 font-fira ">
-          <PokeDex />
+          <BrowserRouter>
+            <RouterPoke />
+          </BrowserRouter>
+          {/* <PokeDex /> */}
         </div>
       </div>
     </>

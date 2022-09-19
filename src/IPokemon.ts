@@ -4,6 +4,10 @@ export interface IPokemon {
     type: string[];
 }
 export interface IPokemonDetail {
+    id: number;
+    name: string;
+    type: string[];
+
 
 }
 export interface IPokemonBase {
