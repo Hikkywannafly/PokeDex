@@ -19,7 +19,7 @@ const Header: React.FC = (props) => {
       <header className="header-container">
         <div
           className={
-            "fixed z-50 w-full bg-white bg-opacity-60 backdrop-blur flex items-center justify-center py-2 transition-all duration-300 transform"
+            "fixed z-50 w-full bg-opacity-20 backdrop-blur flex items-center justify-center py-2 transition-all duration-300 transform"
           }
         >
           <img

@@ -1,11 +1,13 @@
 import React from 'react'
-
+import PokemonBio from '../components/pokemon/PokemonBio'
 type Props = {}
 
 const PokemonDetail: React.FC = (props: Props) => {
     return (
         <>
-            <h1> helelo</h1>
+            <>
+                <PokemonBio/>
+            </>
         </>
     )
 }

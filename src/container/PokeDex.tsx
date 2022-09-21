@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { FaBeer } from 'react-icons/fa';
 import { AiFillGithub } from "react-icons/ai";
 import PokemonList from '../components/pokelist/PokemonList';
-import PokemonDetail from '../components/pokelist/PokemonDetail';
 
 import { useDispatch, useSelector } from 'react-redux';
 const PokeDex: React.FC = () => {

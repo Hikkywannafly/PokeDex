@@ -8,7 +8,7 @@ type Props = {
 
 const InfinityScroll = (props: Props) => {
     const { sizes, pokemonList } = props;
-
+    const [ready, setReady] = useState<boolean>(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [prevY, setPrevY] = useState(1);
     const [showList, setShowList] = useState<any>([]);
@@ -23,6 +23,7 @@ const InfinityScroll = (props: Props) => {
         listUpdate ?
             setShowList([...newPage]) :
             setShowList([...showList, ...newPage])
+        setReady(true);
     }
 
     const handelObserver = (entries: any) => {
@@ -40,9 +41,8 @@ const InfinityScroll = (props: Props) => {
     }
     useEffect(() => {
         // if (pokemonList.length > 0) {
-        console.log(`change`);
         setShowList([]);
-
+        setReady(false);
         setPrevY(0);
 
         if (currentPage !== 1) {
@@ -93,7 +93,7 @@ const InfinityScroll = (props: Props) => {
                 }
             </div>
 
-            {showList.length > 0 && showList.length !== pokemonList.length &&
+            {ready && showList.length > 0 && showList.length !== pokemonList.length &&
                 (
                     <div className="flex justify-center items-center my-10">
                         <LoadingMore />
@@ -102,6 +102,15 @@ const InfinityScroll = (props: Props) => {
                 )
 
             }
+            {!ready &&
+                (
+                    <div className="flex justify-center items-center my-10">
+                        <LoadingMore />
+                    </div>
+                )
+
+            }
+
             {
                 pokemonList.length === 0 && showList.length === 0 && (
                     <div className="flex flex-col justify-center items-center my-20">

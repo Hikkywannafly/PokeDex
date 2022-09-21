@@ -59,15 +59,14 @@ const PokemonList: React.FC = ({ data }: any) => {
             setReset(false);
         }
         else {
-
             setShowPokemon(sortPokemon(pokemon, sortBy));
             setReset(false);
         }
     }, [generation, pokemon])
     return (
         <>
-            <Search handleSearch={handleSearch} />
 
+            <Search handleSearch={handleSearch} />
             <div className="search-type mb-5">
                 <div className="flex flex-row justify-between">
                     <Filter handleFilter={handleFilter} data={PokemonGenerations} reset={reset} />

@@ -32,9 +32,9 @@ const App: React.FC = () => {
   }, [])
   return (
     <>
+      <Header />
       <div className="bg-[#f6f8fc]">
         <FloatingButton />
-        <Header />
         <LoadingHome loading={isLoadingHome} />
         <div className="w-full bg-[#f6f8fc] m-0 p-0 font-fira ">
           <BrowserRouter>
