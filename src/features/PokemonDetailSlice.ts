@@ -1,18 +1,16 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { info } from 'console';
 import { IPokemonDetail } from '../IPokemon';
-import { Stat, Type, Ability, PokemonSpecical, EvolutionChain, Chain, FlavorTextEntrie, Variety } from '../IPokemon';
+import { Stat, Type, Ability, PokemonSpecical, EvolutionChain, Chain, FlavorTextEntrie, Variety, Types } from '../IPokemon';
 import axios from '../services/axios';
 import Axios from 'axios';
 interface PokemonDetail {
-    isLoading: boolean;
-    isError: boolean;
-    error: string;
+
     info: {
         id: string;
         name: string;
         weight: string;
-        types: Type[];
+        types: Types[];
         stats: Stat[];
         isLoading: boolean;
         error: {
@@ -40,9 +38,6 @@ interface PokemonDetail {
     }
 }
 const initialState: PokemonDetail = {
-    isLoading: false,
-    isError: false,
-    error: '',
     info: {
         id: '',
         name: '',
@@ -75,9 +70,6 @@ const initialState: PokemonDetail = {
     }
 }
 const initialStateTeamp: PokemonDetail = {
-    isLoading: false,
-    isError: false,
-    error: '',
     info: {
         id: '',
         name: '',
@@ -160,7 +152,10 @@ const PokemonDetailSlice = createSlice({
             info.id = payload.id;
             info.name = payload.name;
             info.weight = payload.weight;
-            info.types = payload.types;
+            // info.types = payload.types;
+            payload.types.map((index: any) => {
+                info.types.push(index.type.name);
+            })
             info.stats = payload.stats;
             info.isLoading = false
         })
@@ -171,24 +166,7 @@ const PokemonDetailSlice = createSlice({
         })
         // biology pokemon
         builder.addCase(fetchPokemonBiology.pending, ({ biology }: any, { payload }: PayloadAction<any>) => {
-
             biology.isLoading = true;
-            //     abilities: [],
-            // flavor_text_entries: [],
-            // evolution_chain: {
-            //     url: ''
-            // },
-            // varieties: [],
-            // nameKankji: '',
-            // is_baby: false,
-            // is_legendary: false,
-            // is_mythical: false,
-            // generation: '',
-            // isLoading: true,
-            // error: {
-            //     status: 'OK',
-            //     message: null,
-            // },
         })
         builder.addCase(fetchPokemonBiology.fulfilled, ({ biology }: any, { payload }: PayloadAction<any>) => {
             biology.abilities = payload.abilities;
@@ -196,11 +174,11 @@ const PokemonDetailSlice = createSlice({
             biology.evolution_chain = payload.evolution_chain;
             biology.varieties = payload.varieties;
             biology.nameKankji = payload.names[0].name;
-            // is_baby: false,
-            // is_legendary: false,
-            // is_mythical: false,
-            // generation: '',
-            biology.isLoading = false
+            biology.is_baby = payload.is_baby;
+            biology.is_legendary = payload.is_legendary;
+            biology.is_mythical = payload.is_mythical;
+            biology.generation = payload.generation;
+            biology.isLoading = false;
         })
         builder.addCase(fetchPokemonBiology.rejected, ({ biology }: any, { payload }: PayloadAction<any>) => {
             biology.error.status = payload.status

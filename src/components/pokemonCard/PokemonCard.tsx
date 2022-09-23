@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { IPokemonBase } from '../../IPokemon';
 import axios from '..//../services/axios';
-import { typeColors, backgroundColor } from '../../globals';
+import { typeColors, PokemonTypeColors } from '../../globals';
 import ProgressiveImage from "react-progressive-image-loading";
 import Trail from './Trail';
+import TypeBade from '../pokemon/Type';
 type colors = keyof typeof typeColors;
-type bg = keyof typeof backgroundColor;
+type bg = keyof typeof PokemonTypeColors;
 type IProps = {
     data: IPokemonBase
 }
@@ -33,7 +34,7 @@ const PokemonCard = ({ data }: IProps) => {
                 <Trail open={true}>
                     <div
                         onClick={goPokemonDetail}
-                        style={{ boxShadow: `${backgroundColor[pokemon.type[0] as bg]} 0px 0px 1.25rem 0px`, background: `linear-gradient(${backgroundColor[pokemon.type[0] as bg]}, ${backgroundColor[pokemon.type[0] as bg] || backgroundColor[pokemon.type[0] as bg]})` }}
+                        style={{ boxShadow: `${PokemonTypeColors[pokemon.type[0] as bg].light} 0px 0px 1.25rem 0px`, background: `linear-gradient(${PokemonTypeColors[pokemon.type[0] as bg].light}, ${PokemonTypeColors[pokemon.type[0] as bg].light || PokemonTypeColors[pokemon.type[0] as bg].light})` }}
                         className=" relative rounded-xl drop-shadow-[0px_0px_1.25rem_0px_red] w-full h-60 md:h-80
             flex-1 normal-case  flex flex-col justify-between items-center cursor-pointer mt-[10px] pt-6 pb-3  group hover:rounded-[20px] duration-500 hover:drop-shadow-[0px_0px_1.25rem_0px_red]  hover:translate-y-[-10px]  ">
                         <div className="flex justify-items-end ">
@@ -53,11 +54,12 @@ const PokemonCard = ({ data }: IProps) => {
                         </div>
                         <div className="flex flex-col justify-center items-center">
                             <h3 className="mb-3 capitalize font-[700] text-xl lg:text-2xl text-gray-900 "> {name} </h3>
-                            <div className="ability flex flex-row mb-1.5">
+                            <div className="ability flex flex-row mb-1.5 gap-4">
                                 {pokemon.type.map((item: any) =>
-                                    <div key={item} style={{ backgroundColor: typeColors[item as colors] }}
-                                        className='font-[700] opacity-[0.8] text-white rounded-[5px] text-[11px] tracking-widest px-1 mx-1 flex items-center uppercase lg:p-[3px] lg:py-[2px] lg:text-[12px]'> <span> {item} </span>
-                                    </div>
+                                    // <div key={item} style={{ backgroundColor: typeColors[item as colors] }}
+                                    //     className='font-[700] opacity-[0.8] text-white rounded-[5px] text-[11px] tracking-widest px-1 mx-1 flex items-center uppercase lg:p-[3px] lg:py-[2px] lg:text-[12px]'> <span> {item} </span>
+                                    // </div>
+                                    <TypeBade key={item} type={item} sizes='sm' />
                                 )}
                             </div>
 

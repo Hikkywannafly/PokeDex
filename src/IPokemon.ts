@@ -30,7 +30,9 @@ export interface Type {
         name: string;
     };
 }
-
+export interface Types {
+    type: string;
+}
 export interface Ability {
     ability: {
         name: string;
@@ -73,5 +75,5 @@ export interface Variety {
 }
 
 export interface PokemonName {
-    
+
 }
