@@ -11,40 +11,40 @@ import LoadingHome from './components/loading/LoadingHome';
 import { startLoading, stopLoading } from './features/PokemonSlice';
 import { RouterPoke } from './router/Router';
 const App: React.FC = () => {
-  const [isLoadingHome, setIsLoadingHome] = useState(true);
-  const dispatch = useAppDispatch();
-  const pokemonState = useSelector((state: any) => state)
-  const { isLoading, pokemonLength } = pokemonState
-  useEffect(() => {
-    if (pokemonLength === 0 && isLoading) {
-      dispatch(getPokemonList());
-    }
-    setTimeout(() => {
-      setIsLoadingHome(isLoading);
-    }, 1000)
-  }, [pokemonLength]);
-  useEffect(() => {
-    if (pokemonLength && isLoading) dispatch(stopLoading(1))
-    // on unmount
-    return () => {
-      dispatch(startLoading());
-    }
-  }, [])
-  return (
-    <>
-      <Header />
-      <div className="bg-[#f6f8fc]">
-        <FloatingButton />
-        <LoadingHome loading={isLoadingHome} />
-        <div className="w-full bg-[#f6f8fc] m-0 p-0 font-fira ">
-          <BrowserRouter>
-            <RouterPoke />
-          </BrowserRouter>
-          {/* <PokeDex /> */}
-        </div>
-      </div>
-    </>
-  );
+    const [isLoadingHome, setIsLoadingHome] = useState(true);
+    const dispatch = useAppDispatch();
+    const pokemonState = useSelector((state: any) => state.home)
+    const { isLoading, pokemonLength } = pokemonState
+    useEffect(() => {
+        if (pokemonLength === 0 && isLoading) {
+            dispatch(getPokemonList());
+        }
+        setTimeout(() => {
+            setIsLoadingHome(isLoading);
+        }, 1000)
+    }, [pokemonLength]);
+    useEffect(() => {
+        if (pokemonLength && isLoading) dispatch(stopLoading(1))
+        // on unmount
+        return () => {
+            dispatch(startLoading());
+        }
+    }, [])
+    return (
+        <>
+            <Header />
+            <div className="bg-[#f6f8fc]">
+                <FloatingButton />
+                <LoadingHome loading={isLoadingHome} />
+                <div className="w-full bg-[#f6f8fc] m-0 p-0 font-fira ">
+                    <BrowserRouter>
+                        <RouterPoke />
+                    </BrowserRouter>
+                    {/* <PokeDex /> */}
+                </div>
+            </div>
+        </>
+    );
 }
 
 export default App;

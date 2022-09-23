@@ -7,7 +7,7 @@ import { IPokemonBase } from '../../IPokemon';
 import InfinityScroll from '../infinityScroll/InfinityScroll';
 import Reset from '../../components/filter/Reset';
 const PokemonList: React.FC = ({ data }: any) => {
-    const pokemon = useSelector((state: any) => state.pokemon)
+    const pokemon = useSelector((state: any) => state.home.pokemon)
     const [showPokemon, setShowPokemon] = useState<IPokemonBase[]>([]);
     const [generation, setGeneration] = useState<string>('all');
     const [sortBy, setSortBy] = useState<string>('id');
@@ -19,6 +19,7 @@ const PokemonList: React.FC = ({ data }: any) => {
     }
     const handleSearch = (e: any) => {
         const search = e.target.value;
+        if (search.length === 0) setShowPokemon(pokemon);
         const _ = pokemon.filter((pokemon: any) => {
             return pokemon.name.toLowerCase().includes(search.toLowerCase());
         });

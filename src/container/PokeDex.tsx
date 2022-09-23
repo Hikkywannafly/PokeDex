@@ -6,7 +6,7 @@ import PokemonList from '../components/pokelist/PokemonList';
 import { useDispatch, useSelector } from 'react-redux';
 const PokeDex: React.FC = () => {
     const dispatch = useDispatch();
-    const pokemonState = useSelector((state: any) => state.pokemon);
+    const pokemonState = useSelector((state: any) => state.home.pokemon);
     const { pokemon } = pokemonState;
     const [pokemonList, setPokemonList] = useState<any>([]);
 
@@ -36,7 +36,6 @@ const PokeDex: React.FC = () => {
                             <PokemonList />
                         </div>
                         <div className="show-detail">
-                            {pokemonList}
                         </div>
                     </div>
                     {/* <div className="show-pokemon-detail hidden md:block ">
