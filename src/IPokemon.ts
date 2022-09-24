@@ -73,6 +73,16 @@ export interface Variety {
         url: string;
     };
 }
+export interface sprites {
+    back_default: null;
+    back_female: null
+    back_shiny: null;
+    back_shiny_female: null;
+    front_default: null;
+    front_female: null;
+    front_shiny: null;
+    front_shiny_female: null
+}
 
 export interface PokemonName {
 

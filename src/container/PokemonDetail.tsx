@@ -20,9 +20,6 @@ const PokemonDetail: React.FC = (props: Props) => {
     useEffect(() => {
         if (params.pokemon) {
             dispatch(fetchPokemonData(params.pokemon.toLowerCase()));
-
-            console.count(`printed ${params.pokemon}`);
-
         }
         // on unmount
         return () => {
@@ -33,8 +30,11 @@ const PokemonDetail: React.FC = (props: Props) => {
     }, [params.pokemon]);
     useEffect(() => {
         if (!info.isLoading && !biology.isLoading)
-            setLoading(false);
-        console.log(`asdasd`, info, biology);
+            setTimeout(() => {
+                setLoading(false);
+            }, 500)
+        // setLoading(false);
+        // console.log(`asdasd`, info, biology);
     }, [info.isLoading, biology.isLoading]);
     return (
         <>

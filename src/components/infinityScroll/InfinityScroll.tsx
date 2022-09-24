@@ -112,7 +112,7 @@ const InfinityScroll = (props: Props) => {
             }
 
             {
-                pokemonList.length === 0 && showList.length === 0 && (
+                ready && pokemonList.length === 0 && showList.length === 0 && (
                     <div className="flex flex-col justify-center items-center my-20">
                         <img
                             className=" transition duration-500 ease-in-out transform cursor-pointer w-20 h-20 mb-5"

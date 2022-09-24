@@ -32,6 +32,7 @@ const PokemonCard = ({ data }: IProps) => {
         <>
             {pokemon.id && (
                 <Trail open={true}>
+                    {/* <a href={`/pokemon/${name}`} target="_blank" > */}
                     <div
                         onClick={goPokemonDetail}
                         style={{ boxShadow: `${PokemonTypeColors[pokemon.type[0] as bg].light} 0px 0px 1.25rem 0px`, background: `linear-gradient(${PokemonTypeColors[pokemon.type[0] as bg].light}, ${PokemonTypeColors[pokemon.type[0] as bg].light || PokemonTypeColors[pokemon.type[0] as bg].light})` }}
@@ -65,8 +66,10 @@ const PokemonCard = ({ data }: IProps) => {
 
                         </div>
                     </div>
+                    {/* </a> */}
                 </Trail>
-            )}
+            )
+            }
 
         </>
     )

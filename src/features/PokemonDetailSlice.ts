@@ -10,16 +10,21 @@ interface PokemonDetail {
         id: string;
         name: string;
         weight: string;
-        types: Types[];
+        height: string;
+        base_experience: string;
+        types: any[];
+        type: any[];
         stats: Stat[];
         isLoading: boolean;
+        abilities: Ability[];
+        sprites: {};
         error: {
             status: 'OK',
             message: null,
         },
     }
     biology: {
-        abilities: Ability[];
+
         flavor_text_entries: FlavorTextEntrie[];
         evolution_chain: {
             url: string;
@@ -30,6 +35,12 @@ interface PokemonDetail {
         is_legendary: boolean;
         is_mythical: boolean;
         generation: string;
+        egg_groups: any[];
+        habitat: any;
+        shape: any;
+        growth_rate: any;
+        genenral: any[];
+        color: any[];
         isLoading: boolean;
         error: {
             status: 'OK',
@@ -44,20 +55,31 @@ const initialState: PokemonDetail = {
         weight: '',
         types: [],
         stats: [],
+        type: [],
+        height: ``,
+        base_experience: ``,
         isLoading: true,
+        abilities: [],
+        sprites: {},
         error: {
             status: 'OK',
             message: null,
         }
     },
     biology: {
-        abilities: [],
+
         flavor_text_entries: [],
         evolution_chain: {
             url: ''
         },
         varieties: [],
         nameKankji: '',
+        egg_groups: [],
+        habitat: null,
+        shape: null,
+        color: [],
+        growth_rate: null,
+        genenral: [],
         is_baby: false,
         is_legendary: false,
         is_mythical: false,
@@ -74,21 +96,32 @@ const initialStateTeamp: PokemonDetail = {
         id: '',
         name: '',
         weight: '',
+        height: ``,
+        base_experience: ``,
+        abilities: [],
         types: [],
+        type: [],
         stats: [],
         isLoading: true,
+        sprites: {},
         error: {
             status: 'OK',
             message: null,
         }
     },
     biology: {
-        abilities: [],
+
         flavor_text_entries: [],
         evolution_chain: {
             url: ''
         },
         varieties: [],
+        color: [],
+        egg_groups: [],
+        genenral: [],
+        habitat: null,
+        shape: null,
+        growth_rate: null,
         nameKankji: '',
         is_baby: false,
         is_legendary: false,
@@ -120,6 +153,20 @@ export const fetchPokemonBiology = createAsyncThunk(
     async (urlSpecial: any, thunkApi) => {
         try {
             const res = await Axios.get(urlSpecial);
+            thunkApi.dispatch(fetchPokemonEvolution(res.data.evolution_chain.url))
+            return res.data;
+        }
+        catch (err: any) {
+            return thunkApi.rejectWithValue(err.response.data);
+        }
+    }
+)
+export const fetchPokemonEvolution = createAsyncThunk(
+    'detail/getPokemonEvolution',
+    async (urlEvolution: any, thunkApi) => {
+        try {
+            const res = await Axios.get(urlEvolution);
+            console.log(res.data)
             return res.data;
         }
         catch (err: any) {
@@ -147,16 +194,23 @@ const PokemonDetailSlice = createSlice({
             info.isLoading = true;
         })
         builder.addCase(fetchPokemonData.fulfilled, ({ info }: any, { payload }: PayloadAction<any>) => {
-            // info.id = payload.data.id;
-            // info.id = payload.data.id;
+
             info.id = payload.id;
             info.name = payload.name;
             info.weight = payload.weight;
-            // info.types = payload.types;
+            info.height = payload.height;
+            info.base_experience = payload.base_experience;
             payload.types.map((index: any) => {
                 info.types.push(index.type.name);
             })
+            // info.types = payload.types;
+            info.typeUrl = payload
+            payload.types.map((index: any) => {
+                info.type.push(index.type.url);
+            })
             info.stats = payload.stats;
+            info.sprites = payload.sprites;
+            info.abilities = payload.abilities;
             info.isLoading = false
         })
         builder.addCase(fetchPokemonData.rejected, ({ info }: any, { payload }: PayloadAction<any>) => {
@@ -169,7 +223,7 @@ const PokemonDetailSlice = createSlice({
             biology.isLoading = true;
         })
         builder.addCase(fetchPokemonBiology.fulfilled, ({ biology }: any, { payload }: PayloadAction<any>) => {
-            biology.abilities = payload.abilities;
+
             biology.flavor_text_entries = payload.flavor_text_entries;
             biology.evolution_chain = payload.evolution_chain;
             biology.varieties = payload.varieties;
@@ -178,6 +232,12 @@ const PokemonDetailSlice = createSlice({
             biology.is_legendary = payload.is_legendary;
             biology.is_mythical = payload.is_mythical;
             biology.generation = payload.generation;
+            biology.egg_groups = payload.egg_groups;
+            biology.habitat = payload.habitat;
+            biology.shape = payload.shape;
+            biology.growth_rate = payload.growth_rate;
+            biology.genenral = payload.genera;
+            biology.color = payload.color;
             biology.isLoading = false;
         })
         builder.addCase(fetchPokemonBiology.rejected, ({ biology }: any, { payload }: PayloadAction<any>) => {

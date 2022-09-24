@@ -28,13 +28,25 @@ module.exports = {
           "0%": { transform: `translateY(-8px)` },
           "50%": { transform: `translateY(8px)` },
           " 100%": { transform: `translateY(-8px)` },
-        }
+        },
+        'text': {
+          '0%, 100%': {
+            'background-size': '200% 200%',
+            'background-position': 'left center'
+          },
+          '50%': {
+            'background-size': '200% 200%',
+            'background-position': 'right center'
+          }
+        },
       },
+
       animation: {
         aniLoad: 'loading ease-in-out 0.5s forwards',
         aniLoadIcon: 'loadingIcon ease-in-out 2s infinite',
         aniload1: 'loading1 ease-in-out 3s infinite',
         newton: 'pokePre ease-in-out 3s infinite',
+        'text': 'text 5s ease infinite',
       },
 
     },

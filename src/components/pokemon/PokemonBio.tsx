@@ -1,9 +1,11 @@
 import React, { memo } from 'react'
 import { HiArrowNarrowLeft } from 'react-icons/hi';
+import { Link } from 'react-router-dom';
 import { MdArrowBackIosNew, MdArrowForwardIos } from 'react-icons/md';
 import fetchPokemonData from '../../features/PokemonDetailSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { backgroundColor, typeColors, PokemonTypeColors } from '../../globals';
+import ProgressiveImage from "react-progressive-image-loading";
 import TypeBade from '../pokemon/Type';
 import { fadeInUpVariant } from '../../helper/animation';
 type colors = keyof typeof typeColors;
@@ -12,18 +14,25 @@ type bg1 = keyof typeof PokemonTypeColors;
 type Props = {}
 const PokemonBio = (props: Props) => {
     const pokemonState = useSelector((state: any) => state.detail);
+    const pokemonList = useSelector((state: any) => state.home.pokemon);
     const { info, biology, evolution } = pokemonState;
-
     return (
         <>
             {!info.isLoading && (
-
                 <div
                     style={{ backgroundColor: PokemonTypeColors[`${info.types[0]}` as bg1].medium }}
-                    // style={{ background: `linear-gradient(${backgroundColor[info.types[0] as bg]}, ${backgroundColor[info.types[0] as bg] || backgroundColor[info.types[0] as bg]})` }}
-                    className=" w-full h-[350px] flex justify-center ">
-                    <div className="mt-[56px] text-white font-bold h-[294px] flex items-center justify-center">
-                        <MdArrowBackIosNew size='32' />
+                    className="w-full h-[350px] flex justify-center ">
+                    <div className="relative mt-[56px] text-white font-bold h-[294px] flex items-center justify-center">
+                        <div className="absolute top-0 left-1 w-full h-full  ">
+                            <Link to="/">
+                                <HiArrowNarrowLeft className=" hover:animate-ping duration-500" size={32} />
+                            </Link>
+                        </div>
+                        {info.id !== 1 && info.id < 899 && (
+                            <Link to={`/pokemon/${pokemonList[Number(info.id) - 2].name}`} className='hover:animate-ping cursor-pointer w-full'>
+                                <MdArrowBackIosNew size='32' />
+                            </Link>
+                        )}
 
                     </div>
                     <div className="relative w-full h-[294px] flex flex-col md:flex-row mt-[56px] items-center md:w-[65%] lg:w-[55%] mx-1 md:mx-10">
@@ -42,16 +51,26 @@ const PokemonBio = (props: Props) => {
                             className="relative flex justify-center w-[100%] gap-8 mr-3">
                             <div className="relative z-20">
                                 <img src='/pokemonheader/pokeball-icon.png' className="w-[100%] max-w-[220px] max-h-[220px] absolute opacity-40 bottom-[10] right-5 z-[-1]" alt='pokemon' />
-                                <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${info.id}.svg`}
-                                    alt='pikachu'
+                                <ProgressiveImage
+                                    preview={info.sprites.other["official-artwork"].front_default || `./pokemonheader/log2.png`}
+                                    src={info.sprites.other["dream_world"].front_default || info.sprites.other["official-artwork"].front_default || `./pokemonheader/log2.png`}
+                                    render={(src, style) => (
+                                        <img className='max-h-[230px] lg:max-h-[260px] z-50  animate-newton ' src={src} style={style} alt={info.name} />
+                                    )}
+                                />
 
-                                    className="w-[100%] max-h-[230px] lg:max-h-[260px] z-50  animate-newton" />
                             </div >
                             <div className=" w-2 font-bold text-4xl text-white">{biology.nameKankji}</div>
                         </div >
                     </div >
                     <div className="mt-[56px] text-white font-bold h-[294px] flex items-center  justify-center">
-                        <MdArrowForwardIos size='32' />
+                        {info.id < 899 && (
+                            <Link to={`/pokemon/${pokemonList[Number(info.id)].name}` || `/pokemon/${Number(pokemonList[(info.name)].id + 2)}`} className='hover:animate-ping cursor-pointer w-full'>
+                                <MdArrowForwardIos size='32' />
+                            </Link>
+                        )}
+
+
                     </div>
 
                 </div >
