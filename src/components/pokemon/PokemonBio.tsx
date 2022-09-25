@@ -23,11 +23,11 @@ const PokemonBio = (props: Props) => {
                     style={{ backgroundColor: PokemonTypeColors[`${info.types[0]}` as bg1].medium }}
                     className="w-full h-[350px] flex justify-center ">
                     <div className="relative mt-[56px] text-white font-bold h-[294px] flex items-center justify-center w-5">
-                        <div className="absolute top-0 left-1 w-full h-full  ">
-                            <Link to="/">
-                                <HiArrowNarrowLeft className=" hover:animate-ping duration-500 w-full" size={30} />
-                            </Link>
-                        </div>
+
+                        <Link to="/">
+                            <HiArrowNarrowLeft className="absolute top-0 left-1 hover:animate-ping duration-500 w-full" size={30} />
+                        </Link>
+
                         {info.id !== 1 && info.id < 899 && (
                             <Link to={`/pokemon/${pokemonList[Number(info.id) - 2].name}`} className='hover:animate-ping cursor-pointer w-full'>
                                 <MdArrowBackIosNew size='30' />

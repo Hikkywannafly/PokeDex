@@ -17,8 +17,8 @@ const TypeBade = (props: Props) => {
                     hover:scale-110 hover:rotate-[3deg] hover:transform-gpu hover:shadow-2xl duration-300 ease-in-out
                     `}
             >
-                <img src={`/types/${type}.svg`} alt="React Logo" className={`${sizes === `sm` ? `w-4 h-4` : `w5 h-5`} text-white mr-1.5`} />
-                <span className=''>{type}</span>
+                <img src={`/types/${type}.svg`} alt="React Logo" className={`${sizes === `sm` ? `w-3 h-3` : `w5 h-5`} text-white mr-1.5`} />
+                <span className='text-[10px]'>{type}</span>
             </div>
 
         </>
