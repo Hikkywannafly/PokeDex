@@ -47,7 +47,7 @@ const PokemonEvolution = (props: Props) => {
                                 {evolutionChainLv[index] &&
                                     <div key={index + 'asd'} className="flex flex-col justify-center items-center w-32">
                                         <span key={index + '6'} className="text-sm font-semibold text-black text-opacity-80 pointer-events-none capitalize">{evolutionChainLv[index].trigger.name}</span>
-                                        <span key={index + '0'} className="text-sm font-semibold text-red-400 text-opacity-80 pointer-events-none">Lv {evolutionChainLv[index].min_level}</span>
+                                        <span key={index + '0'} className="text-sm font-semibold text-red-400 text-opacity-80 pointer-events-none">Lv {evolutionChainLv[index].min_level ? evolutionChainLv[index].min_level : '???'}</span>
                                     </div>
                                 }
 
