@@ -55,7 +55,7 @@ const PokemonCard = ({ data }: IProps) => {
                         </div>
                         <div className="flex flex-col justify-center items-center">
                             <h3 className="mb-3 capitalize font-[700] text-xl lg:text-2xl text-gray-900 "> {name} </h3>
-                            <div className="ability flex flex-row mb-1.5 gap-4">
+                            <div className="ability flex flex-row mb-1.5 gap-2 md:gap-4">
                                 {pokemon.type.map((item: any) =>
                                     // <div key={item} style={{ backgroundColor: typeColors[item as colors] }}
                                     //     className='font-[700] opacity-[0.8] text-white rounded-[5px] text-[11px] tracking-widest px-1 mx-1 flex items-center uppercase lg:p-[3px] lg:py-[2px] lg:text-[12px]'> <span> {item} </span>

@@ -7,23 +7,24 @@ import PokemonVarieties from '../pokemon/PokemonVarieties';
 import PokemonInfo from '../pokemon/PokemonInfo';
 import PokemonDamage from '../pokemon/PokemonDamage';
 import PokemonStats from '../pokemon/PokemonStats';
+import PokemonEvolution from '../pokemon/PokemonEvolution';
 type Props = {}
 
 const PokemonDetail = (props: Props) => {
     const pokemonData = useSelector((state: any) => state.detail);
     const navigate = useNavigate();
     const { info, biology, evolution } = pokemonData;
-    // console.log(`pokemonData`, info.type);
+
     const handleVarieties = (e: any) => {
         navigate(`/pokemon/${e.target.value.toLowerCase()}`);
     }
     return (
         <>
-            {!info.isLoading && !biology.isLoading &&
+            {!info.isLoading && !biology.isLoading && !evolution.isLoading &&
                 (
                     <>
                         <PokemonBio />
-                        <div className="flex flex-col justify-start items-center w-full">
+                        <div className="flex flex-col justify-start items-center w-full overflow-hidden mb-10">
                             <PokemonVarieties name={info.name} onChange={handleVarieties} varieties={biology.varieties} />
                             <PokemonInfo
                                 description={biology.flavor_text_entries}
@@ -36,7 +37,7 @@ const PokemonDetail = (props: Props) => {
                                 <PokemonDamage types={info.types} title={`DAMAGE DEF`} />
                             </div>
                             <PokemonStats data={info.stats} />
-
+                            <PokemonEvolution key={info} data={evolution} />
                         </div>
                     </>
                 )}

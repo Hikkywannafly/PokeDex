@@ -46,7 +46,7 @@ const PokemonInfo = (props: Props) => {
                         <tbody>
                             <tr className="border-b">
                                 <td colSpan={2} className="px-6 py-4  text-base font-medium text-gray-900">
-                                    {flavorText(description[1].flavor_text)}
+                                    {flavorText(description.filter((item: any) => item.language.name === 'en')[0].flavor_text)}
                                 </td>
                             </tr>
                             <tr className="border-b">

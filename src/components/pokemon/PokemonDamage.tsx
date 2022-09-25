@@ -61,8 +61,8 @@ const PokemonDamage = (props: Props) => {
                         <tbody>
 
                             <tr className="border-b">
-                                <td className="px-6 py-4 w-10 whitespace-nowrap text-sm font-light text-gray-900">Double Damage </td>
-                                <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap capitalize flex flex-row gap-4">
+                                <td className="px-6 py-4 w-40  text-sm font-light text-gray-900">Double Damage </td>
+                                <td className="text-sm text-gray-900 font-medium px-6 py-4  capitalize flex flex-row gap-4 max-w-xs">
 
                                     {removeDuplicates(damageD).map((item: any, index: number) => (
                                         <TypeBade key={index} type={item} />
@@ -72,8 +72,8 @@ const PokemonDamage = (props: Props) => {
                             </tr>
 
                             <tr className="border-b">
-                                <td className="px-6 py-4 w-10 whitespace-nowrap text-sm font-light text-gray-900">Haft Damage</td>
-                                <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap capitalize flex flex-row gap-4">
+                                <td className="px-6 py-4 w-10   text-sm font-light text-gray-900">Haft Damage</td>
+                                <td className="text-sm text-gray-900 font-medium px-6 py-4 capitalize flex flex-wrap gap-4 max-w-xs">
                                     {removeDuplicates(damageH).map((item: any, index: number) => (
                                         <TypeBade key={index} type={item} />
                                     ))}
@@ -81,12 +81,12 @@ const PokemonDamage = (props: Props) => {
                                 </td>
                             </tr>
                             <tr className="border-b">
-                                <td className="px-6 py-4 w-10 whitespace-nowrap text-sm font-light text-gray-900">No Damage</td>
-                                <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap capitalize flex flex-row gap-4">
+                                <td className="px-6 py-4 w-10   text-sm font-light text-gray-900">No Damage</td>
+                                <td className="text-sm text-gray-900 font-medium px-6 py-4  capitalize flex flex-row gap-4">
                                     {removeDuplicates(damageN).map((item: any, index: number) => (
                                         <TypeBade key={index} type={item} />
                                     ))}
-                                    {damageN.length === 0 && <span className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap capitalize flex flex-row gap-4">None</span>}
+                                    {damageN.length === 0 && <span className="text-sm text-gray-900 font-medium px-6 py-4   capitalize flex flex-row gap-4">None</span>}
                                 </td>
                             </tr>
                         </tbody>

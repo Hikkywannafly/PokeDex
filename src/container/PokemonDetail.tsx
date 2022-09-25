@@ -35,7 +35,7 @@ const PokemonDetail: React.FC = (props: Props) => {
             }, 500)
         // setLoading(false);
         // console.log(`asdasd`, info, biology);
-    }, [info.isLoading, biology.isLoading]);
+    }, [info.isLoading, biology.isLoading, evolution.isLoading]);
     return (
         <>
 
@@ -47,6 +47,7 @@ const PokemonDetail: React.FC = (props: Props) => {
                         absolute flex justify-center h-[80%] w-full items-center my-10">
                             <LoadingMore />
                         </div>
+
                     )
             }
         </>

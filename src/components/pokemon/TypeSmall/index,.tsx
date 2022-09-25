@@ -21,11 +21,10 @@ const TypeBade = (props: Props) => {
                     mount: { scale: 1, y: 0 },
                     unmount: { scale: 0, y: 25 },
                 }}>
-
                 <div
                     style={{ backgroundColor: typeColors[type as colors] }}
-                    className={`font-[600] text-white rounded-md tracking-widest  uppercase flex justify-between text-sm p-1.5  w-auto
-                    shadow-lg cursor-pointer items-center
+                    className={`font-[600] text-white rounded-md tracking-widest  uppercase flex justify-between text-sm p-1.5  
+                    shadow-lg cursor-pointer items-center w-7 h-7
                     hover:scale-110 hover:rotate-[3deg] hover:transform-gpu hover:shadow-2xl duration-300 ease-in-out
                     `}
                 >

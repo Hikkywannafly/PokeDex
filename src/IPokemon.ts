@@ -54,12 +54,18 @@ export interface EvolutionChain {
 
 export interface Chain {
     evolves_to: Array<Chain>;
+    evolution_details: any;
     species: {
         name: string;
         url: string;
     };
 }
-
+export interface EvolutionDetails {
+    min_level: number;
+    trigger: {
+        name: string;
+    };
+}
 export interface FlavorTextEntrie {
     flavor_text: string;
     language: {

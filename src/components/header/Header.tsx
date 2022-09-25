@@ -1,25 +1,42 @@
 
 import React, { useEffect, useState, useRef } from "react";
+import useScrollDirection from "../../hooks/useScrollDirection";
 import * as Scroll from 'react-scroll';
 
 let scroll = Scroll.animateScroll;
 const Header: React.FC = (props) => {
   const [scrolledToTop, setScrolledToTop] = useState<boolean>(true);
+  const scrollDirection = useScrollDirection({ initialDirection: "down" });
   const [visible, setVisible] = useState<boolean>(false);
   const refScrollUp = useRef<any>(null);
   const handleScrollUp = () => {
     refScrollUp.current.scrollIntoView({ behavior: "smooth" });
   };
-  useEffect(() => {
 
+  useEffect(() => {
+    const handleScroll = (event: any) => {
+      if (window.scrollY > 500) {
+        setVisible(true);
+      }
+      else {
+        setVisible(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
+
   return (
     <>
       <div ref={refScrollUp}> </div>
       <header className="header-container">
         <div
           className={
-            "fixed z-50 w-full bg-opacity-20 backdrop-blur flex items-center justify-center py-2 transition-all duration-300 transform"
+            `  ${!visible ? 'transition-all bg-opacity-100' : 'bg-white bg-opacity-60 backdrop-blur '} fixed z-50 w-full   flex items-center justify-center py-2 duration-300 transform `
           }
         >
           <img

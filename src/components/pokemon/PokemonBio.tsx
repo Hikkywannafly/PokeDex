@@ -22,15 +22,15 @@ const PokemonBio = (props: Props) => {
                 <div
                     style={{ backgroundColor: PokemonTypeColors[`${info.types[0]}` as bg1].medium }}
                     className="w-full h-[350px] flex justify-center ">
-                    <div className="relative mt-[56px] text-white font-bold h-[294px] flex items-center justify-center">
+                    <div className="relative mt-[56px] text-white font-bold h-[294px] flex items-center justify-center w-5">
                         <div className="absolute top-0 left-1 w-full h-full  ">
                             <Link to="/">
-                                <HiArrowNarrowLeft className=" hover:animate-ping duration-500" size={32} />
+                                <HiArrowNarrowLeft className=" hover:animate-ping duration-500 w-full" size={30} />
                             </Link>
                         </div>
                         {info.id !== 1 && info.id < 899 && (
                             <Link to={`/pokemon/${pokemonList[Number(info.id) - 2].name}`} className='hover:animate-ping cursor-pointer w-full'>
-                                <MdArrowBackIosNew size='32' />
+                                <MdArrowBackIosNew size='30' />
                             </Link>
                         )}
 
@@ -66,7 +66,7 @@ const PokemonBio = (props: Props) => {
                     <div className="mt-[56px] text-white font-bold h-[294px] flex items-center  justify-center">
                         {info.id < 899 && (
                             <Link to={`/pokemon/${pokemonList[Number(info.id)].name}` || `/pokemon/${Number(pokemonList[(info.name)].id + 2)}`} className='hover:animate-ping cursor-pointer w-full'>
-                                <MdArrowForwardIos size='32' />
+                                <MdArrowForwardIos size='30' />
                             </Link>
                         )}
 

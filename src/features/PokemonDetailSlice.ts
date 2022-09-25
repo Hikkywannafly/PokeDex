@@ -47,6 +47,15 @@ interface PokemonDetail {
             message: null,
         };
     }
+    evolution: {
+        chain: any[];
+        evolution_chain: EvolutionChain[],
+        isLoading: boolean;
+        error: {
+            status: 'OK',
+            message: null,
+        };
+    }
 }
 const initialState: PokemonDetail = {
     info: {
@@ -89,7 +98,17 @@ const initialState: PokemonDetail = {
             status: 'OK',
             message: null,
         },
+    },
+    evolution: {
+        chain: [],
+        evolution_chain: [],
+        isLoading: true,
+        error: {
+            status: 'OK',
+            message: null,
+        },
     }
+
 }
 const initialStateTeamp: PokemonDetail = {
     info: {
@@ -132,6 +151,15 @@ const initialStateTeamp: PokemonDetail = {
             status: 'OK',
             message: null,
         },
+    },
+    evolution: {
+        chain: [],
+        evolution_chain: [],
+        isLoading: true,
+        error: {
+            status: 'OK',
+            message: null,
+        },
     }
 }
 export const fetchPokemonData = createAsyncThunk(
@@ -166,7 +194,6 @@ export const fetchPokemonEvolution = createAsyncThunk(
     async (urlEvolution: any, thunkApi) => {
         try {
             const res = await Axios.get(urlEvolution);
-            console.log(res.data)
             return res.data;
         }
         catch (err: any) {
@@ -243,6 +270,18 @@ const PokemonDetailSlice = createSlice({
         builder.addCase(fetchPokemonBiology.rejected, ({ biology }: any, { payload }: PayloadAction<any>) => {
             biology.error.status = payload.status
             biology.error.message = payload.data
+        })
+        builder.addCase(fetchPokemonEvolution.pending, ({ evolution }: any, { payload }: PayloadAction<any>) => {
+            evolution.isLoading = true;
+        })
+        builder.addCase(fetchPokemonEvolution.fulfilled, ({ evolution }: any, { payload }: PayloadAction<any>) => {
+            evolution.chain = payload.chain;
+            evolution.evolution_chain = payload.evolution_chain;
+            evolution.isLoading = false;
+        })
+        builder.addCase(fetchPokemonEvolution.rejected, ({ evolution }: any, { payload }: PayloadAction<any>) => {
+            evolution.error.status = payload.status
+            evolution.error.message = payload.data
         })
     }
 })
