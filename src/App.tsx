@@ -21,7 +21,7 @@ const App: React.FC = () => {
         }
         setTimeout(() => {
             setIsLoadingHome(isLoading);
-        }, 1000)
+        }, 1500)
     }, [pokemonLength]);
     useEffect(() => {
         if (pokemonLength && isLoading) dispatch(stopLoading(1))

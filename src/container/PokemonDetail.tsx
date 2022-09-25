@@ -32,7 +32,7 @@ const PokemonDetail: React.FC = (props: Props) => {
         if (!info.isLoading && !biology.isLoading)
             setTimeout(() => {
                 setLoading(false);
-            }, 500)
+            }, 900)
         // setLoading(false);
         // console.log(`asdasd`, info, biology);
     }, [info.isLoading, biology.isLoading, evolution.isLoading]);

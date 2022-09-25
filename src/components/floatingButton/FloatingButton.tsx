@@ -19,6 +19,9 @@ const FloatingButton = (props: Props) => {
                 setIsActive(false);
             }
         })
+        return () => {
+            window.removeEventListener('scroll', (_: Event) => { })
+        }
     }, [isActive])
 
     return (
