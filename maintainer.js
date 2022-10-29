@@ -4,11 +4,11 @@ Pull requests
 Issues
 Marketplace
 Explore
- 
-@Hikkywannafly 
+
+@Hikkywannafly
 Hikkywannafly
-/
-Hikky-HealthCare
+    /
+    Hikky - HealthCare
 Public
 Code
 Issues
@@ -21,13 +21,13 @@ Security
 2
 Insights
 Settings
-Hikky-HealthCare/src/middleware/auth.verifyToken.js /
+Hikky - HealthCare / src / middleware / auth.verifyToken.js /
 @Hikkywannafly
 Hikkywannafly v.0.0.7.2: fix authv2
 Latest commit 0b15ea3 on 7 Aug
- History
- 1 contributor
-54 lines (49 sloc)  1.61 KB
+History
+1 contributor
+54 lines(49 sloc)  1.61 KB
 
 import jwt from 'jsonwebtoken';
 import { ACCESS_TOKEN_LIFE } from '../config/index';
@@ -67,35 +67,4 @@ const verifyRoleUser = (req, res, next) => {
     })
 }
 
-const verifyTokenAndUserAuthorization  = (req, res, next) => {
-    verifyToken(req, res, () => {
-        if (req.user.id === req.params.id|| 'user'.includes(req.user.role)) {
-          next();
-        } else {
-          res.status(403).json("You're not allowed to do that!");
-        }
-      });
-
-}
-
-module.exports = {
-    verifyToken,
-    verifyRoleUser,
-    verifyTokenAndUserAuthorization,
-};
-Footer
-© 2022 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-Hikky-HealthCare/auth.verifyToken.js at maintain-branch · Hikkywannafly/Hikky-HealthCare
-1
+console.log(`testing verify token`);
